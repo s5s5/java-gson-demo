@@ -1,25 +1,15 @@
-# 使用 Gson
+package a.b.c;
 
-Gson 是一个 Java 库，可用于将 Java 对象转换为其 JSON 表示形式。它还可用于将 JSON 字符串转换为等效的
-Java 对象。Gson 可以处理任意 Java 对象，包括您没有源代码的预先存在的对象。
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
-教程：https://futurestud.io/tutorials/gson-getting-started-with-java-json-serialization-deserialization
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-## 安装
-
-- Maven 依赖
-
-```
-<dependency>
-  <groupId>com.google.code.gson</groupId>
-  <artifactId>gson</artifactId>
-  <version>2.10</version>
-</dependency>
-```
-
-## 使用
-
-```java
 public class useGson {
   public static void main(String[] args) {
     Gson gson = new Gson();
@@ -190,4 +180,107 @@ public class useGson {
     }
   }
 }
-```
+
+class UserSimple {
+  String name;
+  String email;
+  int age;
+  boolean isDeveloper;
+
+  public UserSimple(String norman, String s, int i, boolean b) {
+    name = norman;
+    email = s;
+    age = i;
+    isDeveloper = b;
+  }
+}
+
+class UserNested {
+  String name;
+  String email;
+  boolean isDeveloper;
+  int age;
+
+  // new, see below!
+  UserAddress userAddress;
+
+  public UserNested(String norman, String s, int i, boolean b, UserAddress userAddress) {
+    name = norman;
+    email = s;
+    age = i;
+    isDeveloper = b;
+    this.userAddress = userAddress;
+  }
+}
+
+class UserAddress {
+  String street;
+  String houseNumber;
+  String city;
+  String country;
+
+  public UserAddress(String main_street, String s, String magdeburg, String germany) {
+    street = main_street;
+    houseNumber = s;
+    city = magdeburg;
+    country = germany;
+  }
+}
+
+class Restaurant {
+  String name;
+
+  Owner owner;
+  Cook cook;
+  Waiter waiter;
+}
+
+class Owner {
+  String name;
+
+  UserAddress address;
+}
+
+class Cook {
+  String name;
+  int age;
+  int salary;
+}
+
+class Waiter {
+  String name;
+  int age;
+  int salary;
+}
+
+class RestaurantWithMenu {
+  String name;
+
+  List<RestaurantMenuItem> menu;
+  //RestaurantMenuItem[] menu;
+
+  public RestaurantWithMenu(String future_studio_steak_house, List<RestaurantMenuItem> menu) {
+    name = future_studio_steak_house;
+    this.menu = menu;
+  }
+}
+
+class RestaurantMenuItem {
+  String description;
+  float price;
+
+  public RestaurantMenuItem(String spaghetti, float v) {
+    description = spaghetti;
+    price = v;
+  }
+}
+
+class Founder {
+  String name;
+  int flowerCount;
+}
+
+class AmountWithCurrency {
+  String currency;
+  int amount;
+}
